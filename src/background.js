@@ -1,68 +1,32 @@
-chrome.runtime.onInstalled.addListener((details) => {
-    chrome.contextMenus.create({
-        "id": "ShareX_Upload_Image",
-        "title": "Upload image with ShareX",
-        "contexts": ["image"]
-    });
+const application = "ShareX";
 
-    chrome.contextMenus.create({
-        "id": "ShareX_Upload_Video",
-        "title": "Upload video with ShareX",
-        "contexts": ["video"]
-    });
+const contextMenuItems = [
+    { id: "ShareX_Upload_Image", title: "Upload image with ShareX", contexts: ["image"], action: "UploadImage" },
+    { id: "ShareX_Upload_Video", title: "Upload video with ShareX", contexts: ["video"], action: "UploadVideo" },
+    { id: "ShareX_Upload_Audio", title: "Upload audio with ShareX", contexts: ["audio"], action: "UploadAudio" },
+    { id: "ShareX_Upload_Text", title: "Upload text with ShareX", contexts: ["selection"], action: "UploadText" },
+    { id: "ShareX_Shorten_URL", title: "Shorten URL with ShareX", contexts: ["link"], action: "ShortenURL" }
+];
 
-    chrome.contextMenus.create({
-        "id": "ShareX_Upload_Audio",
-        "title": "Upload audio with ShareX",
-        "contexts": ["audio"]
-    });
-
-    chrome.contextMenus.create({
-        "id": "ShareX_Upload_Text",
-        "title": "Upload text with ShareX",
-        "contexts": ["selection"]
-    });
-
-    chrome.contextMenus.create({
-        "id": "ShareX_Shorten_URL",
-        "title": "Shorten URL with ShareX",
-        "contexts": ["link"]
+chrome.runtime.onInstalled.addListener(() => {
+    contextMenuItems.forEach(({ id, title, contexts }) => {
+        chrome.contextMenus.create({ id, title, contexts });
     });
 });
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
-    let application = "ShareX";
+chrome.contextMenus.onClicked.addListener((info) => {
+    const { menuItemId, srcUrl, selectionText, linkUrl } = info;
 
-    switch (info.menuItemId) {
-        case "ShareX_Upload_Image":
-            chrome.runtime.sendNativeMessage(application, {
-                Action: "UploadImage",
-                URL: info.srcUrl
-            });
-            break;
-        case "ShareX_Upload_Video":
-            chrome.runtime.sendNativeMessage(application, {
-                Action: "UploadVideo",
-                URL: info.srcUrl
-            });
-            break;
-        case "ShareX_Upload_Audio":
-            chrome.runtime.sendNativeMessage(application, {
-                Action: "UploadAudio",
-                URL: info.srcUrl
-            });
-            break;
-        case "ShareX_Upload_Text":
-            chrome.runtime.sendNativeMessage(application, {
-                Action: "UploadText",
-                Text: info.selectionText
-            });
-            break;
-        case "ShareX_Shorten_URL":
-            chrome.runtime.sendNativeMessage(application, {
-                Action: "ShortenURL",
-                URL: info.linkUrl
-            });
-            break;
-    }
+    const selectedItem = contextMenuItems.find(item => item.id === menuItemId);
+
+    if (!selectedItem) return;
+
+    const message = {
+        Action: selectedItem.action,
+        ...(srcUrl && { URL: srcUrl }), 
+        ...(selectionText && { Text: selectionText }), 
+        ...(linkUrl && { URL: linkUrl }) 
+    };
+
+    chrome.runtime.sendNativeMessage(application, message);
 });
