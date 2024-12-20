@@ -11,16 +11,16 @@
       "strict_min_version": "109.0"
     }
   },
-  "description": "Adds 'Upload with ShareX' button to image, video, audio and text selection context menu.",
-  "homepage_url": "https://github.com/BrycensRanch/ShareX-Linux-Port",
+  "description": "Adds 'Upload with SnapX' button to image, video, audio and text selection context menu.",
+  "homepage_url": "https://github.com/BrycensRanch/SnapX",
   "icons": {
-    "16": "Icons/ShareX-16.png",
-    "48": "Icons/ShareX-48.png",
-    "128": "Icons/ShareX-128.png",
-    "256": "Icons/ShareX-128.png"
+    "16": "Icons/SnapX-16.png",
+    "48": "Icons/SnapX-48.png",
+    "128": "Icons/SnapX-128.png",
+    "256": "Icons/SnapX-128.png"
   },
   "manifest_version": 3,
-  "name": "ShareX-Linux",
+  "name": "SnapX",
   "permissions": [
     "contextMenus",
     "nativeMessaging"

@@ -1,11 +1,11 @@
-const application = "ShareX";
+const application = "SnapX";
 
 const contextMenuItems = [
-    { id: "ShareX_Upload_Image", title: "Upload image with ShareX", contexts: ["image"], action: "UploadImage" },
-    { id: "ShareX_Upload_Video", title: "Upload video with ShareX", contexts: ["video"], action: "UploadVideo" },
-    { id: "ShareX_Upload_Audio", title: "Upload audio with ShareX", contexts: ["audio"], action: "UploadAudio" },
-    { id: "ShareX_Upload_Text", title: "Upload text with ShareX", contexts: ["selection"], action: "UploadText" },
-    { id: "ShareX_Shorten_URL", title: "Shorten URL with ShareX", contexts: ["link"], action: "ShortenURL" }
+    { id: "SnapX_Upload_Image", title: "Upload image with SnapX", contexts: ["image"], action: "UploadImage" },
+    { id: "SnapX_Upload_Video", title: "Upload video with SnapX", contexts: ["video"], action: "UploadVideo" },
+    { id: "SnapX_Upload_Audio", title: "Upload audio with SnapX", contexts: ["audio"], action: "UploadAudio" },
+    { id: "SnapX_Upload_Text", title: "Upload text with SnapX", contexts: ["selection"], action: "UploadText" },
+    { id: "SnapX_Shorten_URL", title: "Shorten URL with SnapX", contexts: ["link"], action: "ShortenURL" }
 ];
 
 chrome.runtime.onInstalled.addListener(() => {
