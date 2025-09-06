@@ -12,7 +12,7 @@
     }
   },
   "description": "Adds 'Upload with SnapX' button to image, video, audio and text selection context menu.",
-  "homepage_url": "https://github.com/BrycensRanch/SnapX",
+  "homepage_url": "https://github.com/SnapX/SnapX",
   "icons": {
     "16": "Icons/SnapX-16.png",
     "48": "Icons/SnapX-48.png",
